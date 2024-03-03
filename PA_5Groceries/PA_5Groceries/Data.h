@@ -1,8 +1,11 @@
 #pragma once
 
+#include <stdlib.h> 
+
 
 class Data {
 private:
+	int QType;
 	int customerNumber; // Unique identifier; starts at 1; after 24 hours should be reset to 1
 	int serviceTime; // Random time; varies between express and normal lanes; units in minutes //1-5 mins(e)3-8(n)
 	int totalTime; // totalTime = serviceTime + sum of serviceTimes of customers in line before this customer; 
@@ -10,30 +13,34 @@ private:
 				 //This memory needs to be allocated on the heap!
 public:
 
-	//contructor
-	Data() {
-
+	/*Contructors*/
+	//init
+	Data(int type) {
+		this->QType = type;
+		this->customerNumber = 1;
+		this->serviceTime = this->getServiceTime(type);
+		this->totalTime = this->serviceTime;
 	}
-
-	Data(int cNum, int sTime, int tTime ) {
+	//copy
+	Data(const Data& copy) {
+		this->QType = copy.getType();
+		this->customerNumber = copy.getID() + 1;
+		this->serviceTime = this->getServiceTime(this->QType);
+		this->totalTime = this->serviceTime + copy.getTotal();
 	}
 
 	/*setters*/ 
-	//assign customer number
-	int setID(int currentID);
-
-	//Generate random service time 1-5 units(minutes)
-	int setTime();
-
-	//sum prev sum to service time and return new sum
-	int setTotal(int prevSum);
 
 	/*getters*/
+	int getType() const;
 
-	int getID();
+	int getID() const;
 
-	int getTime();
+	int getTime() const;
 
-	int getTotal();
+	int getTotal() const;
+
+	/*members*/
+	int getServiceTime(int type);
 
 };

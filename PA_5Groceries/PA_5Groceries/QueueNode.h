@@ -3,27 +3,52 @@
 #include <iostream>
 #include "Data.h"
 
+using std::cout;
+using std::endl;
+
 class QueueNode {
 private:
-	Data* pData; // The memory for Data will need to be allocated on the heap as well!
-	QueueNode* pNext;
+	int QType = 0; //queue type
+	Data* pData = nullptr; // The memory for Data will need to be allocated on the heap as well!
+	QueueNode* pNext = nullptr;
 public:
 	/*constructor*/
-	QueueNode() {
-		this->pData = nullptr;
+	//Allocates heap for data. (check for null to verify)
+	QueueNode(int type) {
+		this->QType = type;
+		this->pData = new (std::nothrow) Data(type);
 		this->pNext = nullptr;
 	}
-	/*destructor*/
 
+	/*copy*/
+	//pData will be null if allocation error
+	QueueNode(const QueueNode& copy) {
+		this->QType = copy.getType();
+		this->pData = new (std::nothrow) Data(copy.getData());
+		this->pNext = nullptr;
+	}
+
+	/*destructor*/
+	//check if data was allocated and delete
+	~ QueueNode() {
+		if (this->pData) {
+			delete this->pData;
+		}
+		
+	}
 	/*Setters*/
-	//create new Data returns service time on success
-	int setData(int curID, int accTime);
 
 	//set pNext
-	bool setNext(QueueNode* next);
+	//this function creates new node and sets it to next!
+	//check for proper allocation!
+	bool setNext();
+
+	/*getters*/
+	int getType() const;
+	const Data& getData() const;
+	QueueNode* getNext() const;
 
 	/*members*/
-	//Get service time
-	int getServiceTime();
+	void printData();
 
 };

@@ -1,22 +1,36 @@
 #include "QueueNode.h"
 
 /*Setters*/
-//create new Data returns service time on success return -1 on fail
-int QueueNode::setData(int curID, int accTime) {
-	this->pData = new (std::nothrow) Data();
-	if (pData) {
-		//set customer ID
 
-		//set service time
-
-		//set total time
-		return this->pData->getTime();
+//set pNext
+bool QueueNode::setNext() {
+	this->pNext = new (std::nothrow) QueueNode(*this);
+	if (this->pNext) {
+		return true;
 	}
 	else {
-		return -1;
+		return false;
 	}
 
 }
 
-//set pNext
-bool setNext(QueueNode* next);
+/*getters*/
+int QueueNode::getType() const{
+	return this->QType;
+}
+
+const Data& QueueNode::getData() const {
+	return *this->pData;
+}
+
+QueueNode* QueueNode::getNext() const {
+	return this->pNext;
+}
+
+/*members*/
+void QueueNode::printData() {
+	cout << "type: " << this->pData->getType() << endl;
+	cout << "ID: " << this->pData->getID() << endl;
+	cout << "Service Time: " << this->pData->getTime() << endl;
+	cout << "Total Time: " << this->pData->getTotal() << endl;
+}
