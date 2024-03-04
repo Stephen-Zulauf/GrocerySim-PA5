@@ -16,8 +16,8 @@ public:
 	bool tDequeueM();
 	////run simulation for 24 hours
 	//bool tRunM();
-	////run util functions w/out simulation
-	//void runtUtilSuite();
+	//run util functions w/out simulation
+	void runtUtilSuite();
 	////run all test functions
 	//void runTestSuite();
 };

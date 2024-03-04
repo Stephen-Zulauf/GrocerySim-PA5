@@ -30,10 +30,6 @@ public:
 
 	}
 
-	/*setters*/
-
-	/*getters*/
-
 	/*members*/
 
 	//returns true if queue is empty

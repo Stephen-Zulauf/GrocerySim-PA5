@@ -5,9 +5,7 @@
 int main() {
 	srand(time(NULL));
 	Test newTest;
-	//newTest.tEnqueue();
-	//newTest.tEnqueueM();
-	newTest.tDequeueM();
+	newTest.runtUtilSuite();
 
 	return 0;
 }

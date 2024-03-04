@@ -33,4 +33,5 @@ void QueueNode::printData() {
 	cout << "ID: " << this->pData->getID() << endl;
 	cout << "Service Time: " << this->pData->getTime() << endl;
 	cout << "Total Time: " << this->pData->getTotal() << endl;
+	cout << "------------------------" << endl;
 }
